@@ -11,30 +11,112 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.activities.MainActivity">
 
-    <EditText
-        android:id="@+id/text_edit"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello DevIntensive!"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:layout_marginBottom="@dimen/spacing_small_8">
+
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_call_black_24dp"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/size_large_72"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:layout_marginLeft="@dimen/spacing_medium_32"
+            android:layout_marginRight="@dimen/spacing_normal_16">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:id="@+id/phone_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:hint="Mobile Phone"
+                    android:text="8917971"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:focusable="false"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_phone_in_talk_black_24dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size_1"
+        android:background="@color/grey_light"
+        android:layout_marginLeft="@dimen/spacing_larger_72"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:layout_marginBottom="@dimen/spacing_small_8">
 
-        <Button
-            android:id="@+id/red_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Red Btn"/>
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_email_black_24dp"
+            />
 
-        <Button
-            android:id="@+id/green_btn"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Green Btn"/>
+            android:layout_weight="1"
+            android:layout_height="@dimen/size_large_72"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/spacing_medium_32"
+            android:layout_marginRight="@dimen/spacing_normal_16">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="Mobile Phone"
+                    android:text="myMail"
+                    android:enabled="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:focusable="false"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_send_black_24dp"
+            />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size_2"
+        android:background="@color/grey_light"
+        android:layout_marginLeft="@dimen/spacing_larger_72"/>
+
 </LinearLayout>

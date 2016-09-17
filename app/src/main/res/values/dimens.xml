@@ -52,4 +52,5 @@
 
     <!-- Lines -->
     <dimen name="line_size_1">1dp</dimen>
+    <dimen name="line_size_2">2dp</dimen>
 </resources>
