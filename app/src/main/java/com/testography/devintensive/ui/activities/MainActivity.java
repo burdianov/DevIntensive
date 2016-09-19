@@ -92,6 +92,6 @@ public class MainActivity extends BaseActivity implements View
             public void run() {
                 hideProgress();
             }
-        }, 5000);
+        }, 3000);
     }
 }
