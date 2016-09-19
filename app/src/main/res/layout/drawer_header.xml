@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/spacing_medial_24"
+    android:paddingRight="@dimen/spacing_normal_16"
+    android:paddingLeft="@dimen/spacing_normal_16"
+    android:paddingBottom="@dimen/spacing_small_8"
+    android:layout_height="172dp"
+    android:background="@drawable/header_bg">
+
+    <ImageView
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/color_accent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_medium_56"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/user_name_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Lilian Burdianov"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/user_email_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="lilian.burdianov@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
