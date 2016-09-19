@@ -34,10 +34,10 @@ public class MainActivity extends BaseActivity implements View
 
         if (savedInstanceState == null) {
             // running the activity for the first time
-            showSnackbar("running the activity for the first time");
+//            showSnackbar("running the activity for the first time");
         } else {
             // running the activity for the first time
-            showSnackbar("activity has already been created");
+//            showSnackbar("activity has already been created");
         }
     }
 
