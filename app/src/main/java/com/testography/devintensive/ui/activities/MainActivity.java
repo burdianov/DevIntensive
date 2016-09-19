@@ -2,6 +2,8 @@ package com.testography.devintensive.ui.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ public class MainActivity extends BaseActivity implements View
     public static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
 
     private ImageView mCallImg;
+    private CoordinatorLayout mCoordinatorLayout;
     /**
      * @param savedInstanceState
      */
@@ -25,12 +28,16 @@ public class MainActivity extends BaseActivity implements View
         Log.d(TAG, "onCreate");
 
         mCallImg = (ImageView) findViewById(R.id.call_img);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_layout);
+
         mCallImg.setOnClickListener(this);
 
         if (savedInstanceState == null) {
-            // creating the activity for the first time
+            // running the activity for the first time
+            showSnackbar("running the activity for the first time");
         } else {
-
+            // running the activity for the first time
+            showSnackbar("activity has already been created");
         }
     }
 
@@ -83,6 +90,10 @@ public class MainActivity extends BaseActivity implements View
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    private void showSnackbar(String message) {
+        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
     private void runWithDelay() {
