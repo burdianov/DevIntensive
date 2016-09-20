@@ -225,7 +225,7 @@
                                 android:id="@+id/email_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="true"
+                                android:enabled="false"
                                 android:focusable="false"
                                 android:hint="Email"
                                 android:inputType="textEmailAddress"
@@ -279,7 +279,7 @@
                                 android:id="@+id/vk_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="true"
+                                android:enabled="false"
                                 android:focusable="false"
                                 android:hint="VK Profile"
                                 android:inputType="textEmailAddress"
@@ -333,7 +333,7 @@
                                 android:id="@+id/github_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="true"
+                                android:enabled="false"
                                 android:focusable="false"
                                 android:hint="GitHub"
                                 android:inputType="textEmailAddress"
@@ -384,10 +384,10 @@
                             >
 
                             <EditText
-                                android:id="@+id/about_et"
+                                android:id="@+id/bio_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:enabled="true"
+                                android:enabled="false"
                                 android:focusable="false"
                                 android:hint="About myself"
                                 android:inputType="textMultiLine"
@@ -406,6 +406,7 @@
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/fab"
             android:src="@drawable/ic_mode_edit_black_24dp"
             app:layout_anchor="@id/appbar_layout"
             app:layout_anchorGravity="bottom|right"

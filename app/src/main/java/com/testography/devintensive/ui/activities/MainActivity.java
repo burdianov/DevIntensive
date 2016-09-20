@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -13,20 +14,30 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.testography.devintensive.R;
 import com.testography.devintensive.utils.ConstantManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements View
         .OnClickListener {
 
     public static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
 
+    private int mCurrentEditMode = 0;
+
     private ImageView mCallImg;
     private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolbar;
     private DrawerLayout mNavigationDrawer;
+    private FloatingActionButton mFab;
+    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
+
+    private List<EditText> mUserInfo;
 
     /**
      * @param savedInstanceState
@@ -41,18 +52,35 @@ public class MainActivity extends BaseActivity implements View
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mUserPhone = (EditText) findViewById(R.id.phone_et);
+        mUserMail = (EditText) findViewById(R.id.email_et);
+        mUserVk = (EditText) findViewById(R.id.vk_et);
+        mUserGit = (EditText) findViewById(R.id.github_et);
+        mUserBio = (EditText) findViewById(R.id.bio_et);
+
+        mUserInfo = new ArrayList<>();
+        mUserInfo.add(mUserPhone);
+        mUserInfo.add(mUserMail);
+        mUserInfo.add(mUserVk);
+        mUserInfo.add(mUserGit);
+        mUserInfo.add(mUserBio);
 
         setupToolbar();
         setupDrawer();
 
-        mCallImg.setOnClickListener(this);
+//        mCallImg.setOnClickListener(this);
+
+        mFab.setOnClickListener(this);
+
 
         if (savedInstanceState == null) {
             // running the activity for the first time
 //            showSnackbar("running the activity for the first time");
         } else {
-            // running the activity for the first time
-//            showSnackbar("activity has already been created");
+            mCurrentEditMode = savedInstanceState.getInt(ConstantManager
+                    .EDIT_MODE_KEY, 0);
+            changeEditMode(mCurrentEditMode);
         }
     }
 
@@ -71,12 +99,18 @@ public class MainActivity extends BaseActivity implements View
                 showProgress();
                 runWithDelay();
                 break;
+            case R.id.fab:
+                showSnackbar("click FAB");
+                mCurrentEditMode = (mCurrentEditMode == 0 ? 1 : 0);
+                changeEditMode(mCurrentEditMode);
+                break;
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(ConstantManager.EDIT_MODE_KEY, mCurrentEditMode);
     }
 
     private void showSnackbar(String message) {
@@ -105,6 +139,36 @@ public class MainActivity extends BaseActivity implements View
                 return false;
             }
         });
+    }
+
+    /**
+     * edit mode switch
+     *
+     * @param mode: if 1 - edit mode; if 0 - view mode
+     */
+    private void changeEditMode(int mode) {
+        if (mode == 1) {
+
+            for (EditText userValue : mUserInfo) {
+                userValue.setEnabled(true);
+                userValue.setFocusable(true);
+                userValue.setFocusableInTouchMode(true);
+            }
+        } else {
+            for (EditText userValue : mUserInfo) {
+                userValue.setEnabled(false);
+                userValue.setFocusable(false);
+                userValue.setFocusableInTouchMode(false);
+            }
+        }
+    }
+
+    private void loadUserInfoValue() {
+
+    }
+
+    private void saveUserInfoValue() {
+
     }
 
     private void runWithDelay() {
