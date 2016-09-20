@@ -100,7 +100,6 @@ public class MainActivity extends BaseActivity implements View
                 runWithDelay();
                 break;
             case R.id.fab:
-                showSnackbar("click FAB");
                 mCurrentEditMode = (mCurrentEditMode == 0 ? 1 : 0);
                 changeEditMode(mCurrentEditMode);
                 break;
@@ -148,13 +147,14 @@ public class MainActivity extends BaseActivity implements View
      */
     private void changeEditMode(int mode) {
         if (mode == 1) {
-
+            mFab.setImageResource(R.drawable.ic_check_black_24dp);
             for (EditText userValue : mUserInfo) {
                 userValue.setEnabled(true);
                 userValue.setFocusable(true);
                 userValue.setFocusableInTouchMode(true);
             }
         } else {
+            mFab.setImageResource(R.drawable.ic_mode_edit_black_24dp);
             for (EditText userValue : mUserInfo) {
                 userValue.setEnabled(false);
                 userValue.setFocusable(false);
