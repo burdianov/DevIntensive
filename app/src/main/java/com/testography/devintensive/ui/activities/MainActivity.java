@@ -41,6 +41,9 @@ public class MainActivity extends BaseActivity implements View
 
     private List<EditText> mUserInfoViews;
 
+    //TODO: find bug why the initial data aren't taken from the default ones in
+    // activity_main.xml
+
     /**
      * @param savedInstanceState
      */
@@ -72,6 +75,7 @@ public class MainActivity extends BaseActivity implements View
 
         setupToolbar();
         setupDrawer();
+        loadUserInfoValue();
 
 //        mCallImg.setOnClickListener(this);
 
@@ -94,6 +98,12 @@ public class MainActivity extends BaseActivity implements View
             mNavigationDrawer.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveUserInfoValue();
     }
 
     @Override
@@ -163,6 +173,7 @@ public class MainActivity extends BaseActivity implements View
                 userValue.setEnabled(false);
                 userValue.setFocusable(false);
                 userValue.setFocusableInTouchMode(false);
+                saveUserInfoValue();
             }
         }
     }
@@ -175,7 +186,12 @@ public class MainActivity extends BaseActivity implements View
     }
 
     private void saveUserInfoValue() {
+        List<String> userData = new ArrayList<>();
 
+        for (EditText userFieldView : mUserInfoViews) {
+            userData.add(userFieldView.getText().toString());
+        }
+        mDataManager.getPreferencesManager().saveUserProfileData(userData);
     }
 
     private void runWithDelay() {
