@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -90,6 +91,17 @@ public class MainActivity extends BaseActivity implements View
                     .EDIT_MODE_KEY, 0);
             changeEditMode(mCurrentEditMode);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            if (mNavigationDrawer.isDrawerOpen(GravityCompat.START)) {
+                mNavigationDrawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
