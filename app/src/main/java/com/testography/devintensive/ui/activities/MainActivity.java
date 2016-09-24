@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.testography.devintensive.R;
 import com.testography.devintensive.data.managers.DataManager;
@@ -43,9 +46,13 @@ public class MainActivity extends BaseActivity implements View
     private Toolbar mToolbar;
     private DrawerLayout mNavigationDrawer;
     private FloatingActionButton mFab;
-    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
+    private RelativeLayout mProfilePlaceholder;
+    private CollapsingToolbarLayout mCollapsingToolbar;
 
+    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
     private List<EditText> mUserInfoViews;
+
+    private AppBarLayout.LayoutParams mAppBarParams = null;
 
     //TODO: find bug why the initial data aren't taken from the default ones in
     // activity_main.xml
@@ -66,6 +73,9 @@ public class MainActivity extends BaseActivity implements View
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mProfilePlaceholder = (RelativeLayout) findViewById(R.id.profile_placeholder);
+        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
         mUserPhone = (EditText) findViewById(R.id.phone_et);
         mUserMail = (EditText) findViewById(R.id.email_et);
         mUserVk = (EditText) findViewById(R.id.vk_et);
@@ -163,6 +173,8 @@ public class MainActivity extends BaseActivity implements View
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
+
+        mAppBarParams = (AppBarLayout.LayoutParams) mCollapsingToolbar.getLayoutParams();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -197,6 +209,9 @@ public class MainActivity extends BaseActivity implements View
                 userValue.setEnabled(true);
                 userValue.setFocusable(true);
                 userValue.setFocusableInTouchMode(true);
+
+                showProfilePlaceholder();
+                lockToolbar();
             }
         } else {
             mFab.setImageResource(R.drawable.ic_mode_edit_black_24dp);
@@ -204,6 +219,9 @@ public class MainActivity extends BaseActivity implements View
                 userValue.setEnabled(false);
                 userValue.setFocusable(false);
                 userValue.setFocusableInTouchMode(false);
+
+                hideProfilePlaceholder();
+                unlockToolbar();
                 saveUserInfoValue();
             }
         }
@@ -253,5 +271,24 @@ public class MainActivity extends BaseActivity implements View
 
     private void loadPhotoFromCamera() {
 
+    }
+
+    private void hideProfilePlaceholder() {
+        mProfilePlaceholder.setVisibility(View.GONE);
+    }
+
+    private void showProfilePlaceholder() {
+        mProfilePlaceholder.setVisibility(View.VISIBLE);
+    }
+
+    private void lockToolbar() {
+        mAppBarParams.setScrollFlags(0);
+        mCollapsingToolbar.setLayoutParams(mAppBarParams);
+    }
+
+    private void unlockToolbar() {
+        mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams
+                .SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
+        mCollapsingToolbar.setLayoutParams(mAppBarParams);
     }
 }
