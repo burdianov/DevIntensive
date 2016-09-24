@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -33,8 +36,12 @@ import com.testography.devintensive.data.managers.DataManager;
 import com.testography.devintensive.utils.ConstantManager;
 import com.testography.devintensive.utils.RoundedAvatarDrawable;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements View
@@ -282,7 +289,22 @@ public class MainActivity extends BaseActivity implements View
     }
 
     private void loadPhotoFromCamera() {
+        File photoFile = null;
+        Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            photoFile = createImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // TODO: 24-Sep-16 process the exeption
+        }
 
+        if (photoFile != null) {
+            // TODO: 24-Sep-16 pass the photofile to the intent
+            takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile
+                    (photoFile));
+            startActivityForResult(takeCaptureIntent,
+                    ConstantManager.REQUEST_CAMERA_PICTURE);
+        }
     }
 
     private void hideProfilePlaceholder() {
@@ -340,5 +362,17 @@ public class MainActivity extends BaseActivity implements View
             default:
                 return null;
         }
+    }
+
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
+                Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory
+                (Environment.DIRECTORY_PICTURES);
+
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+
+        return image;
     }
 }
