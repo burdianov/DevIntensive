@@ -1,5 +1,6 @@
 package com.testography.devintensive.ui.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -232,5 +233,25 @@ public class MainActivity extends BaseActivity implements View
                 hideProgress();
             }
         }, 3000);
+    }
+
+    /**
+     * Receive a result from other Activity (photo from camera or gallery)
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void loadPhotoFromGallery() {
+
+    }
+
+    private void loadPhotoFromCamera() {
+
     }
 }
