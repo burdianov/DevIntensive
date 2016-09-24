@@ -27,13 +27,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/user_photo_img"
-                    android:layout_width="match_parent"
+                <FrameLayout
                     android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/user_photo"
-                    android:layout_height="@dimen/profile_image_size"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_image_size">
+
+                    <ImageView
+                        android:id="@+id/user_photo_img"
+                        android:layout_width="match_parent"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/userphoto"
+                        android:layout_height="@dimen/profile_image_size"/>
+
+                    <RelativeLayout
+                        android:id="@+id/profile_placeholder"
+                        android:visibility="gone"
+                        android:background="@color/grey_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_marginBottom="@dimen/spacing_small_8"
+                            android:textColor="@color/white"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_centerHorizontal="true"
+                            android:layout_above="@+id/photo_placeholder"
+                            android:text="@string/user_profile.placeholder.image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <ImageView
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="@dimen/spacing_large_56"
+                            android:id="@+id/photo_placeholder"
+                            android:src="@drawable/add_a_photo_48px"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:scaleType="centerCrop"
+                            android:layout_width="@dimen/placeholder_photo_size_90"
+                            android:layout_height="@dimen/placeholder_photo_size_90"/>
+                    </RelativeLayout>
+
+                </FrameLayout>
 
                 <android.support.v7.widget.Toolbar
                     app:titleTextColor="@color/white"
@@ -47,361 +83,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="96dp"
-                    android:background="@color/grey"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="5"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_medium_24"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rating"
-                            android:textColor="@color/white"/>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="@dimen/line_size_1"
-                        android:layout_height="@dimen/size_medium_56"
-                        android:background="@color/grey_light"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="5"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_medium_24"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Lines of code"
-                            android:textColor="@color/white"/>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="@dimen/line_size_1"
-                        android:layout_height="@dimen/size_medium_56"
-                        android:background="@color/grey_light"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="5"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_medium_24"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Projects"
-                            android:textColor="@color/white"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small_8"
-                    android:layout_marginTop="@dimen/spacing_small_8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        style="@style/icon.left"
-                        android:src="@drawable/ic_call_black_24dp"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/size_large_72"
-                        android:layout_marginLeft="@dimen/spacing_medium_32"
-                        android:layout_marginRight="@dimen/spacing_normal_16"
-                        android:layout_weight="1"
-                        android:gravity="bottom"
-                        android:orientation="vertical">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <EditText
-                                android:id="@+id/phone_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:focusable="false"
-                                android:hint="Mobile Phone"
-                                android:inputType="phone"
-                                android:text="+971 50 3166303"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/call_img"
-                        style="@style/icon.right"
-                        android:src="@drawable/ic_phone_in_talk_black_24dp"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_size_1"
-                    android:layout_marginLeft="@dimen/spacing_larger_72"
-                    android:background="@color/grey_light"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small_8"
-                    android:layout_marginTop="@dimen/spacing_small_8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        style="@style/icon.left"
-                        android:src="@drawable/ic_email_black_24dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/size_large_72"
-                        android:layout_marginLeft="@dimen/spacing_medium_32"
-                        android:layout_marginRight="@dimen/spacing_normal_16"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <EditText
-                                android:id="@+id/email_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:focusable="false"
-                                android:hint="Email"
-                                android:inputType="textEmailAddress"
-                                android:text="lilian.burdianov@gmail.com"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/icon.right"
-                        android:src="@drawable/ic_send_black_24dp"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_size_1"
-                    android:layout_marginLeft="@dimen/spacing_larger_72"
-                    android:background="@color/grey_light"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small_8"
-                    android:layout_marginTop="@dimen/spacing_small_8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        style="@style/icon.left"
-                        android:src="@drawable/ic_vk_grey"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/size_large_72"
-                        android:layout_marginLeft="@dimen/spacing_medium_32"
-                        android:layout_marginRight="@dimen/spacing_normal_16"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <EditText
-                                android:id="@+id/vk_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:focusable="false"
-                                android:hint="VK Profile"
-                                android:inputType="textEmailAddress"
-                                android:text="vk.com/lilian.burdianov"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/icon.right"
-                        android:src="@drawable/ic_visibility_black_24dp"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_size_1"
-                    android:layout_marginLeft="@dimen/spacing_larger_72"
-                    android:background="@color/grey_light"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small_8"
-                    android:layout_marginTop="@dimen/spacing_small_8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        style="@style/icon.left"
-                        android:src="@drawable/ic_github_circle_grey"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/size_large_72"
-                        android:layout_marginLeft="@dimen/spacing_medium_32"
-                        android:layout_marginRight="@dimen/spacing_normal_16"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <EditText
-                                android:id="@+id/github_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:focusable="false"
-                                android:hint="GitHub"
-                                android:inputType="textEmailAddress"
-                                android:text="github.com/burdianov"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/icon.right"
-                        android:src="@drawable/ic_visibility_black_24dp"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_size_1"
-                    android:layout_marginLeft="@dimen/spacing_larger_72"
-                    android:background="@color/grey_light"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_small_8"
-                    android:layout_marginTop="@dimen/spacing_small_8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        style="@style/icon.left"
-                        android:src="@drawable/ic_person_black_24dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/size_large_72"
-                        android:layout_marginLeft="@dimen/spacing_medium_32"
-                        android:layout_marginRight="@dimen/spacing_normal_16"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <EditText
-                                android:id="@+id/bio_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:focusable="false"
-                                android:hint="About myself"
-                                android:inputType="textMultiLine"
-                                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"/>
-
-                        </android.support.design.widget.TextInputLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        <include layout="@layout/user_profile_content"/>
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
