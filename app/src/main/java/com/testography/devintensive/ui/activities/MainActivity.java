@@ -1,5 +1,7 @@
 package com.testography.devintensive.ui.activities;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +17,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -98,7 +101,7 @@ public class MainActivity extends BaseActivity implements View
 //        mCallImg.setOnClickListener(this);
 
         mFab.setOnClickListener(this);
-
+        mProfilePlaceholder.setOnClickListener(this);
 
         if (savedInstanceState == null) {
             // running the activity for the first time
@@ -158,6 +161,9 @@ public class MainActivity extends BaseActivity implements View
             case R.id.fab:
                 mCurrentEditMode = (mCurrentEditMode == 0 ? 1 : 0);
                 changeEditMode(mCurrentEditMode);
+                break;
+            case R.id.profile_placeholder:
+                showDialog(ConstantManager.LOAD_PROFILE_PHOTO);
                 break;
         }
     }
@@ -293,5 +299,39 @@ public class MainActivity extends BaseActivity implements View
         mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams
                 .SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
         mCollapsingToolbar.setLayoutParams(mAppBarParams);
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case ConstantManager.LOAD_PROFILE_PHOTO:
+                String[] selectItems = {getString(R.string
+                        .user_profile_dialog_gallery), getString(R.string
+                        .user_profile_dialog_camera), getString(R.string.user_profile_dialog_cancel)};
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.user_profile_dialog_title);
+                builder.setItems(selectItems, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                // TODO: 24-Sep-16 load from gallery
+                                showSnackbar("Load from gallery");
+                                break;
+                            case 1:
+                                // TODO: 24-Sep-16 load from camera
+                                showSnackbar("Load from camera");
+                                break;
+                            case 2:
+                                // TODO: 24-Sep-16 cancel
+                                showSnackbar("Cancel");
+                                break;
+                        }
+                    }
+                });
+                return builder.create();
+            default:
+                return null;
+        }
     }
 }
