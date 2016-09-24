@@ -1,5 +1,7 @@
 package com.testography.devintensive.ui.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -21,7 +23,9 @@ import android.widget.ImageView;
 import com.testography.devintensive.R;
 import com.testography.devintensive.data.managers.DataManager;
 import com.testography.devintensive.utils.ConstantManager;
+import com.testography.devintensive.utils.RoundedAvatarDrawable;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +94,19 @@ public class MainActivity extends BaseActivity implements View
             mCurrentEditMode = savedInstanceState.getInt(ConstantManager
                     .EDIT_MODE_KEY, 0);
             changeEditMode(mCurrentEditMode);
+        }
+    }
+
+    private void setupRoundedAvatar() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        ImageView avatar = (ImageView) navigationView.getHeaderView(0)
+                .findViewById(R.id.avatar);
+        InputStream resource = getResources().openRawResource(R.raw.avatar);
+        Bitmap bitmap = BitmapFactory.decodeStream(resource);
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            avatar.setBackgroundDrawable(new RoundedAvatarDrawable(bitmap));
+        } else {
+            avatar.setBackground(new RoundedAvatarDrawable(bitmap));
         }
     }
 
@@ -164,6 +181,7 @@ public class MainActivity extends BaseActivity implements View
                 return false;
             }
         });
+        setupRoundedAvatar();
     }
 
     /**
