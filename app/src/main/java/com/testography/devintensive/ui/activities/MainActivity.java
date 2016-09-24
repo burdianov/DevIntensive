@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -220,6 +221,7 @@ public class MainActivity extends BaseActivity implements View
 
                 showProfilePlaceholder();
                 lockToolbar();
+                mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
             }
         } else {
             mFab.setImageResource(R.drawable.ic_mode_edit_black_24dp);
@@ -230,6 +232,8 @@ public class MainActivity extends BaseActivity implements View
 
                 hideProfilePlaceholder();
                 unlockToolbar();
+                mCollapsingToolbar.setExpandedTitleColor(getResources().getColor
+                        (R.color.white));
                 saveUserInfoValue();
             }
         }
@@ -316,14 +320,17 @@ public class MainActivity extends BaseActivity implements View
                         switch (which) {
                             case 0:
                                 // TODO: 24-Sep-16 load from gallery
+                                loadPhotoFromGallery();
                                 showSnackbar("Load from gallery");
                                 break;
                             case 1:
                                 // TODO: 24-Sep-16 load from camera
+                                loadPhotoFromCamera();
                                 showSnackbar("Load from camera");
                                 break;
                             case 2:
                                 // TODO: 24-Sep-16 cancel
+                                dialog.cancel();
                                 showSnackbar("Cancel");
                                 break;
                         }
