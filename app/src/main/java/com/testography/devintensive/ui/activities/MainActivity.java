@@ -1,6 +1,7 @@
 package com.testography.devintensive.ui.activities;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -437,6 +438,13 @@ public class MainActivity extends BaseActivity implements View
 
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        values.put(MediaStore.MediaColumns.DATA, image.getAbsolutePath());
+
+        this.getContentResolver().insert(MediaStore.Images.Media
+                .EXTERNAL_CONTENT_URI, values);
         return image;
     }
 
