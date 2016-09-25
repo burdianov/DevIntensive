@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.squareup.picasso.Picasso;
 import com.testography.devintensive.R;
 import com.testography.devintensive.data.managers.DataManager;
 import com.testography.devintensive.utils.ConstantManager;
@@ -60,11 +61,14 @@ public class MainActivity extends BaseActivity implements View
     private RelativeLayout mProfilePlaceholder;
     private CollapsingToolbarLayout mCollapsingToolbar;
     private AppBarLayout mAppBarLayout;
+    private ImageView mProfileImage;
 
     private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
     private List<EditText> mUserInfoViews;
 
     private AppBarLayout.LayoutParams mAppBarParams = null;
+    private File mPhotoFile = null;
+    private Uri mSelectedImage = null;
 
     //TODO: find bug why the initial data aren't taken from the default ones in
     // activity_main.xml
@@ -88,6 +92,7 @@ public class MainActivity extends BaseActivity implements View
         mProfilePlaceholder = (RelativeLayout) findViewById(R.id.profile_placeholder);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
+        mProfileImage = (ImageView) findViewById(R.id.user_photo_img);
 
         mUserPhone = (EditText) findViewById(R.id.phone_et);
         mUserMail = (EditText) findViewById(R.id.email_et);
@@ -281,27 +286,51 @@ public class MainActivity extends BaseActivity implements View
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ConstantManager.REQUEST_GALLERY_PICTURE:
+                if (requestCode == RESULT_OK && data != null) {
+                    mSelectedImage = data.getData();
+
+                    insertProfileImage(mSelectedImage);
+                }
+                break;
+            case ConstantManager.REQUEST_CAMERA_PICTURE:
+                if (resultCode == RESULT_OK && mPhotoFile != null) {
+                    mSelectedImage = Uri.fromFile(mPhotoFile);
+
+                    insertProfileImage(mSelectedImage);
+                }
+        }
+    }
+
+    private void insertProfileImage(Uri selectedImage) {
+        Picasso.with(this)
+                .load(selectedImage)
+                .into(mProfileImage);
     }
 
     private void loadPhotoFromGallery() {
+        Intent takeGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        takeGalleryIntent.setType("image/*");
+        startActivityForResult(Intent.createChooser(takeGalleryIntent, getString(R.string.user_profile_choose_message)), ConstantManager.REQUEST_GALLERY_PICTURE);
 
     }
 
     private void loadPhotoFromCamera() {
-        File photoFile = null;
+
         Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
-            photoFile = createImageFile();
+            mPhotoFile = createImageFile();
         } catch (IOException e) {
             e.printStackTrace();
             // TODO: 24-Sep-16 process the exeption
         }
 
-        if (photoFile != null) {
+        if (mPhotoFile != null) {
             // TODO: 24-Sep-16 pass the photofile to the intent
             takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile
-                    (photoFile));
+                    (mPhotoFile));
             startActivityForResult(takeCaptureIntent,
                     ConstantManager.REQUEST_CAMERA_PICTURE);
         }
