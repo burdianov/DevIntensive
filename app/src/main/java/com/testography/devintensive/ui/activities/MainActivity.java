@@ -3,6 +3,7 @@ package com.testography.devintensive.ui.activities;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -18,6 +20,8 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -112,6 +116,7 @@ public class MainActivity extends BaseActivity implements View
         loadUserInfoValue();
         Picasso.with(this)
                 .load(mDataManager.getPreferencesManager().loadUserPhoto())
+                .placeholder(R.drawable.userphoto)
                 .into(mProfileImage);
 
 //        mCallImg.setOnClickListener(this);
@@ -315,21 +320,54 @@ public class MainActivity extends BaseActivity implements View
     }
 
     private void loadPhotoFromCamera() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission
+                .CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat
+                .checkSelfPermission(this, android.Manifest.permission
+                        .WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            try {
+                mPhotoFile = createImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // TODO: 24-Sep-16 process the exeption
+            }
 
-        Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        try {
-            mPhotoFile = createImageFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // TODO: 24-Sep-16 process the exeption
+            if (mPhotoFile != null) {
+                // TODO: 24-Sep-16 pass the photofile to the intent
+                takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile
+                        (mPhotoFile));
+                startActivityForResult(takeCaptureIntent,
+                        ConstantManager.REQUEST_CAMERA_PICTURE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.CAMERA,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, ConstantManager.CAMERA_REQUEST_PERMISSION_CODE);
+
+            Snackbar.make(mCoordinatorLayout, "In order for application to " +
+                            "function properly, please set the necessary rights",
+                    Snackbar.LENGTH_LONG).setAction("Allow", new View
+                    .OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openApplicationSettings();
+                }
+            }).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == ConstantManager.CAMERA_REQUEST_PERMISSION_CODE &&
+                grantResults.length == 2) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // TODO: 25-Sep-16 process permission
+            }
         }
 
-        if (mPhotoFile != null) {
-            // TODO: 24-Sep-16 pass the photofile to the intent
-            takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile
-                    (mPhotoFile));
-            startActivityForResult(takeCaptureIntent,
-                    ConstantManager.REQUEST_CAMERA_PICTURE);
+        if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            // TODO: 25-Sep-16 process other permission
         }
     }
 
@@ -369,17 +407,17 @@ public class MainActivity extends BaseActivity implements View
                             case 0:
                                 // TODO: 24-Sep-16 load from gallery
                                 loadPhotoFromGallery();
-                                showSnackbar("Load from gallery");
+//                                showSnackbar("Load from gallery");
                                 break;
                             case 1:
                                 // TODO: 24-Sep-16 load from camera
                                 loadPhotoFromCamera();
-                                showSnackbar("Load from camera");
+//                                showSnackbar("Load from camera");
                                 break;
                             case 2:
                                 // TODO: 24-Sep-16 cancel
                                 dialog.cancel();
-                                showSnackbar("Cancel");
+//                                showSnackbar("Cancel");
                                 break;
                         }
                     }
@@ -408,5 +446,13 @@ public class MainActivity extends BaseActivity implements View
                 .into(mProfileImage);
 
         mDataManager.getPreferencesManager().saveUserPhoto(selectedImage);
+    }
+
+    public void openApplicationSettings() {
+        Intent appSettingsIntent = new Intent(Settings
+                .ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" +
+                getPackageName()));
+        startActivityForResult(appSettingsIntent, ConstantManager
+                .PERMISSION_REQUEST_SETTINGS_CODE);
     }
 }
