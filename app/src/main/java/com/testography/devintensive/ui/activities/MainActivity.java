@@ -110,6 +110,9 @@ public class MainActivity extends BaseActivity implements View
         setupToolbar();
         setupDrawer();
         loadUserInfoValue();
+        Picasso.with(this)
+                .load(mDataManager.getPreferencesManager().loadUserPhoto())
+                .into(mProfileImage);
 
 //        mCallImg.setOnClickListener(this);
 
@@ -303,12 +306,6 @@ public class MainActivity extends BaseActivity implements View
         }
     }
 
-    private void insertProfileImage(Uri selectedImage) {
-        Picasso.with(this)
-                .load(selectedImage)
-                .into(mProfileImage);
-    }
-
     private void loadPhotoFromGallery() {
         Intent takeGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
@@ -403,5 +400,13 @@ public class MainActivity extends BaseActivity implements View
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
         return image;
+    }
+
+    private void insertProfileImage(Uri selectedImage) {
+        Picasso.with(this)
+                .load(selectedImage)
+                .into(mProfileImage);
+
+        mDataManager.getPreferencesManager().saveUserPhoto(selectedImage);
     }
 }

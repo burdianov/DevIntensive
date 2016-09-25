@@ -1,6 +1,7 @@
 package com.testography.devintensive.data.managers;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import com.testography.devintensive.utils.ConstantManager;
 import com.testography.devintensive.utils.DevintensiveApplication;
@@ -45,4 +46,15 @@ public class PreferencesManager {
         return userFields;
     }
 
+    public void saveUserPhoto(Uri uri) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(ConstantManager.USER_PHOTO_KEY, uri.toString());
+        editor.apply();
+    }
+
+    public Uri loadUserPhoto() {
+        return Uri.parse(mSharedPreferences.getString(ConstantManager
+                .USER_PHONE_KEY, "android.resource://com.softdesign" +
+                ".devintensive/drawable/avatar"));
+    }
 }
