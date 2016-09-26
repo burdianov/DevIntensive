@@ -28,7 +28,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +49,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity implements View
         .OnClickListener {
 
@@ -58,17 +60,36 @@ public class MainActivity extends BaseActivity implements View
     private DataManager mDataManager;
     private int mCurrentEditMode = 0;
 
-    private ImageView mCallImg;
-    private CoordinatorLayout mCoordinatorLayout;
-    private Toolbar mToolbar;
-    private DrawerLayout mNavigationDrawer;
-    private FloatingActionButton mFab;
-    private RelativeLayout mProfilePlaceholder;
-    private CollapsingToolbarLayout mCollapsingToolbar;
-    private AppBarLayout mAppBarLayout;
-    private ImageView mProfileImage;
+    @BindView(R.id.call_img)
+    ImageView mCallImg;
+    @BindView(R.id.main_coordinator_layout)
+    CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.navigation_drawer)
+    DrawerLayout mNavigationDrawer;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab;
+    @BindView(R.id.profile_placeholder)
+    RelativeLayout mProfilePlaceholder;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout mCollapsingToolbar;
+    @BindView(R.id.appbar_layout)
+    AppBarLayout mAppBarLayout;
+    @BindView(R.id.user_photo_img)
+    ImageView mProfileImage;
 
-    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
+    @BindView(R.id.phone_et)
+    EditText mUserPhone;
+    @BindView(R.id.email_et)
+    EditText mUserMail;
+    @BindView(R.id.vk_et)
+    EditText mUserVk;
+    @BindView(R.id.github_et)
+    EditText mUserGit;
+    @BindView(R.id.bio_et)
+    EditText mUserBio;
+
     private List<EditText> mUserInfoViews;
 
     private AppBarLayout.LayoutParams mAppBarParams = null;
@@ -85,25 +106,9 @@ public class MainActivity extends BaseActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate");
+        ButterKnife.bind(this);
 
         mDataManager = DataManager.getInstance();
-
-        mCallImg = (ImageView) findViewById(R.id.call_img);
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_layout);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
-        mProfilePlaceholder = (RelativeLayout) findViewById(R.id.profile_placeholder);
-        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
-        mProfileImage = (ImageView) findViewById(R.id.user_photo_img);
-
-        mUserPhone = (EditText) findViewById(R.id.phone_et);
-        mUserMail = (EditText) findViewById(R.id.email_et);
-        mUserVk = (EditText) findViewById(R.id.vk_et);
-        mUserGit = (EditText) findViewById(R.id.github_et);
-        mUserBio = (EditText) findViewById(R.id.bio_et);
 
         mUserInfoViews = new ArrayList<>();
         mUserInfoViews.add(mUserPhone);
@@ -239,6 +244,8 @@ public class MainActivity extends BaseActivity implements View
                 userValue.setEnabled(true);
                 userValue.setFocusable(true);
                 userValue.setFocusableInTouchMode(true);
+
+                mUserPhone.requestFocus();
 
                 showProfilePlaceholder();
                 lockToolbar();
