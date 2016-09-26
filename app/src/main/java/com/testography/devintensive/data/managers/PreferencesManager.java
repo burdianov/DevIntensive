@@ -54,7 +54,7 @@ public class PreferencesManager {
 
     public Uri loadUserPhoto() {
         return Uri.parse(mSharedPreferences.getString(ConstantManager
-                .USER_PHONE_KEY, "android.resource://com.softdesign" +
+                .USER_PHONE_KEY, "android.resource://com.testography" +
                 ".devintensive/drawable/avatar"));
     }
 }
