@@ -79,6 +79,13 @@ public class MainActivity extends BaseActivity implements View
     @BindView(R.id.user_photo_img)
     ImageView mProfileImage;
 
+    @BindView(R.id.email_img)
+    ImageView mEmailImg;
+    @BindView(R.id.vk_img)
+    ImageView mVkImg;
+    @BindView(R.id.github_img)
+    ImageView mGithubImg;
+
     @BindView(R.id.phone_et)
     EditText mUserPhone;
     @BindView(R.id.email_et)
@@ -125,7 +132,10 @@ public class MainActivity extends BaseActivity implements View
                 .placeholder(R.drawable.userphoto)
                 .into(mProfileImage);
 
-//        mCallImg.setOnClickListener(this);
+        mCallImg.setOnClickListener(this);
+        mEmailImg.setOnClickListener(this);
+        mVkImg.setOnClickListener(this);
+        mGithubImg.setOnClickListener(this);
 
         mFab.setOnClickListener(this);
         mProfilePlaceholder.setOnClickListener(this);
@@ -182,8 +192,27 @@ public class MainActivity extends BaseActivity implements View
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.call_img:
-                showProgress();
-                runWithDelay();
+//                showProgress();
+//                runWithDelay();
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" + mUserPhone.getText().toString()));
+                startActivity(callIntent);
+                break;
+            case R.id.email_img:
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri
+                        .fromParts("mailto", "lilian.burdianov@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"abc@gmail" +
+                        ".com", "mudium@yahoo.com"});
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                break;
+            case R.id.vk_img:
+
+                break;
+            case R.id.github_img:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mUserGit
+                        .getText().toString())));
                 break;
             case R.id.fab:
                 mCurrentEditMode = (mCurrentEditMode == 0 ? 1 : 0);
