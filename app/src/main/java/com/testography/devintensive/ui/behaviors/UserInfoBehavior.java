@@ -22,14 +22,14 @@ public class UserInfoBehavior<V extends LinearLayout> extends AppBarLayout
     public UserInfoBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.UserInfoBehavior);
-        mMaxAppbarHeight = a.getDimensionPixelSize(R.styleable
+        mMinUserInfoHeight = a.getDimensionPixelSize(R.styleable
                 .UserInfoBehavior_behavior_min_height, 56);
         a.recycle();
         mMinAppbarHeight = UiHelper.getStatusBarHeight() + UiHelper
                 .getActionBarHeight();
-        mMaxUserInfoHeight = context.getResources().getDimensionPixelSize(R.dimen
+        mMaxAppbarHeight = context.getResources().getDimensionPixelSize(R.dimen
                 .profile_image_size);
-        mMinUserInfoHeight = context.getResources().getDimensionPixelSize(R.dimen
+        mMaxUserInfoHeight = context.getResources().getDimensionPixelSize(R.dimen
                 .user_info_size);
     }
 
