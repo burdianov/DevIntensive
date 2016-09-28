@@ -5,7 +5,7 @@
 
     <!-- Fonts // English and English-like scripts -->
     <dimen name="font_small_12">12sp</dimen>
-    <dimen name="font_normal_14">14sp</dimen>
+    <dimen name="font_small_14">14sp</dimen>
     <dimen name="font_normal_16">16sp</dimen>
     <dimen name="font_normal_18">18sp</dimen>
     <dimen name="font_medium_20">20sp</dimen>

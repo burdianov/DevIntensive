@@ -18,6 +18,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="AppTheme.Button.Red" parent="Base.Widget.AppCompat.Button">
+        <item name="android:colorButtonNormal">@color/color_accent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="icon">
         <item name="android:layout_width">@dimen/size_small_24</item>
         <item name="android:layout_height">@dimen/size_small_24</item>
@@ -37,6 +42,34 @@
 
     <style name="custom_dialog">
         <item name="android:fullDark">@android:color/transparent</item>
+    </style>
+
+    <style name="user_info_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:enabled">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="user_info">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="user_info.value" parent="user_info">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="user_info.hint" parent="user_info">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
 </resources>

@@ -1,9 +1,17 @@
 <resources>
-    <string name="app_name">DevIntensive</string>
+    <string name="app_name">Lilian Burdianov</string>
     <string name="user_profile.placeholder.image">Change profile picture</string>
     <string name="user_profile_dialog.gallery">Load from the gallery</string>
     <string name="user_profile_dialog.camera">Take a picture</string>
     <string name="user_profile_dialog.cancel">Cancel</string>
     <string name="user_profile_dialog.title">Change user profile picture</string>
     <string name="user_profile.choose.message">Pick a photo</string>
+
+    <string name="ff_regular">sans-serif</string>
+    <string name="ff_medium">sans-serif-medium</string>
+    <string name="auth.remember">Forgot your password?</string>
+    <string name="auth.email">Enter you email</string>
+    <string name="auth.password">Enter password</string>
+    <string name="auth.authorization_enter">Login</string>
+    <string name="auth.login">Login</string>
 </resources>
