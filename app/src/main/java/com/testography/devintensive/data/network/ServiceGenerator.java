@@ -1,5 +1,6 @@
 package com.testography.devintensive.data.network;
 
+import com.testography.devintensive.data.network.interceptors.HeaderInterceptor;
 import com.testography.devintensive.utils.AppConfig;
 
 import okhttp3.OkHttpClient;
@@ -22,6 +23,7 @@ public class ServiceGenerator {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         httpClient.addInterceptor(logging);
+        httpClient.addInterceptor(new HeaderInterceptor());
 
         Retrofit retrofit = sBuilder
                 .client(httpClient.build())

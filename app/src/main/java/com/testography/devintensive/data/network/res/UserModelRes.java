@@ -136,6 +136,14 @@ public class UserModelRes {
         @SerializedName("token")
         @Expose
         private String token;
+
+        public String getToken() {
+            return token;
+        }
+
+        public User getUser() {
+            return user;
+        }
     }
 
     public class Contacts {

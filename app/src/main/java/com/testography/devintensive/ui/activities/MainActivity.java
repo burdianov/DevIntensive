@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.testography.devintensive.R;
@@ -99,6 +100,9 @@ public class MainActivity extends BaseActivity implements View
 
     private List<EditText> mUserInfoViews;
 
+    private TextView mUserValueRating, mUserValueCodeLines, mUserValueProjects;
+    private List<TextView> mUserValueViews;
+
     private AppBarLayout.LayoutParams mAppBarParams = null;
     private File mPhotoFile = null;
     private Uri mSelectedImage = null;
@@ -117,6 +121,10 @@ public class MainActivity extends BaseActivity implements View
 
         mDataManager = DataManager.getInstance();
 
+        mUserValueRating = (TextView) findViewById(R.id.user_info_rate_txt);
+        mUserValueCodeLines = (TextView) findViewById(R.id.user_info_code_lines_txt);
+        mUserValueProjects = (TextView) findViewById(R.id.user_info_project_txt);
+
         mUserInfoViews = new ArrayList<>();
         mUserInfoViews.add(mUserPhone);
         mUserInfoViews.add(mUserMail);
@@ -124,9 +132,16 @@ public class MainActivity extends BaseActivity implements View
         mUserInfoViews.add(mUserGit);
         mUserInfoViews.add(mUserBio);
 
+        mUserValueViews = new ArrayList<>();
+        mUserValueViews.add(mUserValueRating);
+        mUserValueViews.add(mUserValueCodeLines);
+        mUserValueViews.add(mUserValueProjects);
+
         setupToolbar();
         setupDrawer();
-        loadUserInfoValue();
+        initUserFields();
+        initUserInfoValue();
+
         Picasso.with(this)
                 .load(mDataManager.getPreferencesManager().loadUserPhoto())
                 .placeholder(R.drawable.userphoto)
@@ -185,7 +200,7 @@ public class MainActivity extends BaseActivity implements View
     @Override
     protected void onPause() {
         super.onPause();
-        saveUserInfoValue();
+        saveUserFields();
     }
 
     @Override
@@ -291,25 +306,32 @@ public class MainActivity extends BaseActivity implements View
                 unlockToolbar();
                 mCollapsingToolbar.setExpandedTitleColor(getResources().getColor
                         (R.color.white));
-                saveUserInfoValue();
+                saveUserFields();
             }
         }
     }
 
-    private void loadUserInfoValue() {
+    private void initUserFields() {
         List<String> userData = mDataManager.getPreferencesManager().loadUserProfileData();
         for (int i = 0; i < userData.size(); i++) {
             mUserInfoViews.get(i).setText(userData.get(i));
         }
     }
 
-    private void saveUserInfoValue() {
+    private void saveUserFields() {
         List<String> userData = new ArrayList<>();
 
         for (EditText userFieldView : mUserInfoViews) {
             userData.add(userFieldView.getText().toString());
         }
         mDataManager.getPreferencesManager().saveUserProfileData(userData);
+    }
+
+    private void initUserInfoValue() {
+        List<String> userData = mDataManager.getPreferencesManager().loadUserProfileValues();
+        for (int i = 0; i < userData.size(); i++) {
+            mUserValueViews.get(i).setText(userData.get(i));
+        }
     }
 
     private void runWithDelay() {
