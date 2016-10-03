@@ -14,4 +14,7 @@
     <string name="auth.password">Enter password</string>
     <string name="auth.authorization_enter">Login</string>
     <string name="auth.login">Login</string>
+    <string name="profile.bio.dummy">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eleifend lectus sed tellus malesuada cursus. Pellentesque non lorem eu lorem suscipit porta vel ac est. Sed lacinia faucibus massa eu porttitor. Etiam dictum pulvinar risus, nec lobortis ex cursus auctor. Phasellus quis eros arcu. Nam accumsan erat ut posuere rutrum. Sed iaculis orci ac arcu convallis, a viverra velit tincidunt. Proin finibus odio id leo pharetra, vel consequat lorem scelerisque. Nulla vitae lorem nec massa convallis tristique. Morbi aliquet eu erat eu efficitur. Nunc in dui eget eros venenatis sodales ac ac elit. Curabitur sollicitudin nibh eu erat dapibus tincidunt.
+    </string>
 </resources>
