@@ -12,13 +12,17 @@ import com.testography.devintensive.R;
 import com.testography.devintensive.data.network.res.UserListRes;
 import com.testography.devintensive.ui.views.AspectRatioImageView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter
         .UserViewHolder> {
 
     Context mContext;
-    ArrayList<UserListRes.UserData> mUsers;
+    List<UserListRes.UserData> mUsers;
+
+    public UsersAdapter(List<UserListRes.UserData> users) {
+        mUsers = users;
+    }
 
     @Override
     public UsersAdapter.UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
