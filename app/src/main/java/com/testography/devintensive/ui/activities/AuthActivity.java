@@ -106,7 +106,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
 
     private void saveUserValues(UserModelRes userModel) {
         int[] userValues = {
-                userModel.getData().getUser().getProfileValues().getRate(),
+                userModel.getData().getUser().getProfileValues().getRating(),
                 userModel.getData().getUser().getProfileValues().getLinesCode(),
                 userModel.getData().getUser().getProfileValues().getProjects()
         };

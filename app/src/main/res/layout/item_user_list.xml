@@ -18,6 +18,7 @@
             android:layout_height="wrap_content">
 
             <com.testography.devintensive.ui.views.AspectRatioImageView
+                android:id="@+id/user_photo_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -53,6 +54,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/rating_txt"
                     android:text="0"
                     android:fontFamily="@string/ff_medium"
                     android:textSize="@dimen/font_medium_20"
@@ -77,6 +79,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/code_lines_txt"
                     android:text="0"
                     android:fontFamily="@string/ff_medium"
                     android:textSize="@dimen/font_medium_20"
@@ -101,6 +104,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/projects_txt"
                     android:text="0"
                     android:fontFamily="@string/ff_medium"
                     android:textSize="@dimen/font_medium_20"

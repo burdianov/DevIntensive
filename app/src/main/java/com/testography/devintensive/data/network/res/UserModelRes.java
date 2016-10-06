@@ -97,6 +97,14 @@ public class UserModelRes {
         @SerializedName("updated")
         @Expose
         private String updated;
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public String getBio() {
+            return bio;
+        }
     }
 
     public class ProfileValues {
@@ -124,7 +132,7 @@ public class UserModelRes {
             return linesCode;
         }
 
-        public int getRate() {
+        public int getRating() {
             return rate;
         }
     }
