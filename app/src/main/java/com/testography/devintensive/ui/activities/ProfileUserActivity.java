@@ -2,8 +2,12 @@ package com.testography.devintensive.ui.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +28,7 @@ public class ProfileUserActivity extends BaseActivity {
     private EditText mUserBio;
     private TextView mUserRating, mUserCodeLines, mUserProjects;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private CoordinatorLayout mCoordinatorLayout;
 
     private ListView mRepoListView;
 
@@ -39,6 +44,7 @@ public class ProfileUserActivity extends BaseActivity {
         mUserCodeLines = (TextView) findViewById(R.id.user_info_code_lines_txt);
         mUserProjects = (TextView) findViewById(R.id.user_info_project_txt);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_layout);
 
         mRepoListView = (ListView) findViewById(R.id.repositories_list);
 
@@ -63,6 +69,14 @@ public class ProfileUserActivity extends BaseActivity {
         final RepositoriesAdapter repositoriesAdapter = new RepositoriesAdapter
                 (this, repositories);
         mRepoListView.setAdapter(repositoriesAdapter);
+
+        mRepoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Snackbar.make(mCollapsingToolbarLayout, "Repository " +
+                        repositories.get(position), Snackbar.LENGTH_LONG).show();
+            }
+        });
 
         mUserBio.setText(userDTO.getBio());
         mUserRating.setText(userDTO.getRating());
