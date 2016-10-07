@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/main_coordinator_layout"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:background="@color/color_primary"
+        android:id="@+id/appbar_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:contentScrim="@color/color_primary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <ImageView
+                android:fitsSystemWindows="true"
+                android:id="@+id/user_photo_img"
+                android:layout_height="@dimen/profile_image_size"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user_bg"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.PopupOverlay"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/white"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:background="@color/grey"
+        android:gravity="center"
+        android:id="@+id/user_info_wrapper"
+        android:layout_height="@dimen/size_huge_112"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        app:behavior_min_height="@dimen/size_medium_56"
+        app:layout_behavior=".ui.behaviors.UserInfoBehavior">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="@dimen/size_large_88"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/user_info_rate_txt"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_medium_24"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Rating"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <View
+            android:background="@color/grey_light"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_width="@dimen/line_size_1"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/user_info_code_lines_txt"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_medium_24"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Lines of code"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <View
+            android:background="@color/grey_light"
+            android:layout_height="@dimen/size_large_72"
+            android:layout_width="@dimen/line_size_1"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/user_info_project_txt"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_medium_24"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Projects"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/static_profile_content"/>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -207,7 +207,7 @@
                         android:enabled="false"
                         android:focusable="false"
                         android:hint="GitHub"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textUri"
                         android:text="github.com/burdianov"
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey"
