@@ -75,6 +75,8 @@ public class ProfileUserActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Snackbar.make(mCollapsingToolbarLayout, "Repository " +
                         repositories.get(position), Snackbar.LENGTH_LONG).show();
+                // TODO: 07-Oct-16 Implement browsing the clicked repository
+                // using Intent.ACTION_VIEW
             }
         });
 
