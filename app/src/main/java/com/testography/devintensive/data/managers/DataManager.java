@@ -2,6 +2,8 @@ package com.testography.devintensive.data.managers;
 
 import android.content.Context;
 
+import com.squareup.picasso.Picasso;
+import com.testography.devintensive.data.network.PicassoCache;
 import com.testography.devintensive.data.network.RestService;
 import com.testography.devintensive.data.network.ServiceGenerator;
 import com.testography.devintensive.data.network.req.UserLoginReq;
@@ -13,6 +15,7 @@ import retrofit2.Call;
 
 public class DataManager {
     private static DataManager INSTANCE = null;
+    private Picasso mPicasso;
 
     private Context mContext;
     private PreferencesManager mPreferencesManager;
@@ -22,6 +25,7 @@ public class DataManager {
         mPreferencesManager = new PreferencesManager();
         mContext = DevintensiveApplication.getContext();
         mRestService = ServiceGenerator.createService(RestService.class);
+        mPicasso = new PicassoCache(mContext).getPicassoInstance();
     }
 
     public static DataManager getInstance() {
@@ -33,6 +37,14 @@ public class DataManager {
 
     public PreferencesManager getPreferencesManager() {
         return mPreferencesManager;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public Picasso getPicasso() {
+        return mPicasso;
     }
 
     //region =============== Network ===============
