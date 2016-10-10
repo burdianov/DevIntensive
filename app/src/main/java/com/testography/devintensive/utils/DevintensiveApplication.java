@@ -7,15 +7,16 @@ import android.preference.PreferenceManager;
 
 public class DevintensiveApplication extends Application {
 
+    private static Context sContext;
     public static SharedPreferences sSharedPreferences;
-    private static Context sApplicationContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        sContext = getApplicationContext();
         sSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sApplicationContext = getApplicationContext();
+
     }
 
     public static SharedPreferences getSharedPreferences() {
@@ -23,6 +24,6 @@ public class DevintensiveApplication extends Application {
     }
 
     public static Context getContext() {
-        return sApplicationContext;
+        return sContext;
     }
 }
