@@ -1,5 +1,7 @@
 package com.testography.devintensive.data.storage.models;
 
+import com.testography.devintensive.data.network.res.UserModelRes;
+
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -20,6 +22,12 @@ public class Repository {
     private String repositoryName;
 
     private String userRemoteId;
+
+    public Repository(UserModelRes.Repo repositoryRes, String userId) {
+        this.repositoryName = repositoryRes.getGit();
+        this.userRemoteId = userId;
+        this.remoteId = repositoryRes.getId();
+    }
 
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.

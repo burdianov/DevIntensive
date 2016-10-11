@@ -1,5 +1,7 @@
 package com.testography.devintensive.data.storage.models;
 
+import com.testography.devintensive.data.network.res.UserListRes;
+
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -43,6 +45,15 @@ public class User {
             @JoinProperty(name = "remoteId", referencedName = "userRemoteId")
     })
     private List<Repository> repositories;
+
+    public User(UserListRes.UserData userRes) {
+        this.remoteId = userRes.getId();
+        this.photo = userRes.getPublicInfo().getPhoto();
+        this.fullName = userRes.getFullName();
+        this.rating = userRes.getProfileValues().getRating();
+        this.projects = userRes.getProfileValues().getProjects();
+        this.bio = userRes.getPublicInfo().getBio();
+    }
 
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
